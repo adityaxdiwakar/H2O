@@ -9,7 +9,6 @@ from PIL import Image, ImageDraw, ImageFont
 SCALE_FACTOR = 4
 
 for timeframe in data:
-
     img = Image.new('RGB', (192*SCALE_FACTOR, 640*SCALE_FACTOR), color = 'black')
     pixels = img.load()
     for row in range(320*SCALE_FACTOR,640*SCALE_FACTOR):
