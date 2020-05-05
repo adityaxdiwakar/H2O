@@ -1,10 +1,10 @@
+from PIL import Image, ImageDraw, ImageFont
+
 import json
 import time
 
 with open("bin/sample_data.json", "r") as f:
     data = json.load(f)
-
-from PIL import Image, ImageDraw, ImageFont
 
 SCALE_FACTOR = 4
 
@@ -38,10 +38,6 @@ for timeframe in data:
             for column in range(128*SCALE_FACTOR, 128*SCALE_FACTOR + int(64*ask_perc*SCALE_FACTOR)):
                 pixels[column, row] = (255,0,0)
 
-    # for row in range(1,320*SCALE_FACTOR):
-    #     for column in range(128*SCALE_FACTOR, 192*SCALE_FACTOR):
-    #         pixels[column, row] = (255,0,0)
-
     for row in range(640*SCALE_FACTOR):
         if row % (32*SCALE_FACTOR) == 0:
             for column in range(1, 192*SCALE_FACTOR):
@@ -56,10 +52,7 @@ for timeframe in data:
             for column in range(64*SCALE_FACTOR, 128*SCALE_FACTOR):
                 pixels[column, row] = (255, 255, 255)
 
-    # d.text((10,10), "Hello World", fill=(255,255,0))
-
     prices = []
-
     for bid in timeframe["bids"]:
         prices.append(bid["price"])
 
@@ -83,6 +76,5 @@ for timeframe in data:
     for index, ask in enumerate(asks):
         position = (130*SCALE_FACTOR, ((index)*32*SCALE_FACTOR) + 6*SCALE_FACTOR)
         d.text(position, str(ask).zfill(2), font=fnt, fill=(0,0,0))
-
 
     img.save('bin/output.png')
